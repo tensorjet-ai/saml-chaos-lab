@@ -1,0 +1,68 @@
+{
+  "name": "saml-chaos-lab",
+  "version": "0.1.0",
+  "description": "Open-core SAML 2.0 fault-injection baseline CLI runner (Apache-2.0)",
+  "license": "Apache-2.0",
+  "homepage": "https://saml.tensorjetai.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tensorjetai/saml-chaos-lab.git",
+    "directory": "packages/cli"
+  },
+  "keywords": [
+    "saml",
+    "saml2",
+    "sso",
+    "security",
+    "testing",
+    "playwright",
+    "cli"
+  ],
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "exports": {
+    ".": "./dist/cli.mjs",
+    "./helpers": "./dist/helpers.mjs"
+  },
+  "bin": {
+    "saml-chaos-lab": "bin/saml-chaos-lab.mjs"
+  },
+  "files": [
+    "bin",
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "start": "node dist/cli.mjs",
+    "prepack": "pnpm build"
+  },
+  "dependencies": {
+    "@fastify/rate-limit": "11.1.0",
+    "@peculiar/x509": "2.0.0",
+    "@playwright/test": "1.61.1",
+    "@xmldom/xmldom": "0.9.10",
+    "fast-xml-parser": "5.10.1",
+    "fastify": "5.10.0",
+    "jose": "6.2.3",
+    "reflect-metadata": "0.2.2",
+    "safe-regex2": "5.1.1",
+    "xml-crypto": "6.1.2",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@saml-chaos/browser-runner": "workspace:*",
+    "@saml-chaos/observability": "workspace:*",
+    "@saml-chaos/saml-core": "workspace:*",
+    "@saml-chaos/scenarios": "workspace:*",
+    "@saml-chaos/target-safety": "workspace:*",
+    "esbuild": "0.28.1",
+    "tsx": "4.23.1"
+  }
+}

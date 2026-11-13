@@ -1,0 +1,9 @@
+{
+  "name": "@saml-chaos/browser-runner",
+  "version": "0.1.0",
+  "type": "module",
+  "exports": "./src/index.ts",
+  "dependencies": {
+    "@playwright/test": "1.61.1"
+  }
+}

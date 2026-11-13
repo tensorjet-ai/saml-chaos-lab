@@ -1,0 +1,18 @@
+FROM mcr.microsoft.com/playwright:v1.61.1-noble AS build
+
+WORKDIR /workspace
+RUN corepack enable
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml tsconfig.json vitest.config.ts ./
+COPY apps/idp ./apps/idp
+COPY packages ./packages
+COPY fixtures ./fixtures
+RUN pnpm install --frozen-lockfile \
+  && pnpm --filter saml-chaos-lab build \
+  && pnpm --filter saml-chaos-lab deploy --prod --legacy /runner
+
+FROM mcr.microsoft.com/playwright:v1.61.1-noble AS runner
+WORKDIR /app
+RUN chown pwuser:pwuser /app
+COPY --from=build --chown=pwuser:pwuser /runner ./
+USER pwuser
+ENTRYPOINT ["node", "/app/bin/saml-chaos-lab.mjs"]

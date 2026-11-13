@@ -1,0 +1,49 @@
+name: SAML Chaos Lab
+description: Run open-core baseline SAML security checks and publish the Markdown summary.
+inputs:
+  login-url:
+    description: SP login start URL
+    required: true
+  acs-url:
+    description: SP assertion consumer service URL
+    required: true
+  sp-entity-id:
+    description: SP entity ID
+    required: true
+  success-url:
+    description: Regular expression matching the authenticated success URL
+    required: true
+  fail-on:
+    description: Fail when a high or critical finding meets this threshold
+    required: false
+    default: high
+runs:
+  using: composite
+  steps:
+    - name: Build SAML Chaos Lab baseline runner
+      shell: bash
+      run: docker build -f "${GITHUB_ACTION_PATH}/Dockerfile.runner" "${GITHUB_ACTION_PATH}" -t saml-chaos-lab-runner
+    - name: Run SAML Chaos Lab baseline checks
+      shell: bash
+      env:
+        INPUT_LOGIN_URL: ${{ inputs.login-url }}
+        INPUT_ACS_URL: ${{ inputs.acs-url }}
+        INPUT_SP_ENTITY_ID: ${{ inputs.sp-entity-id }}
+        INPUT_SUCCESS_URL: ${{ inputs.success-url }}
+        INPUT_FAIL_ON: ${{ inputs.fail-on }}
+      run: |
+        set -euo pipefail
+        docker run --rm \
+          --user "$(id -u):$(id -g)" \
+          --network host \
+          -v "$GITHUB_WORKSPACE:/workspace" \
+          -v "$GITHUB_STEP_SUMMARY:$GITHUB_STEP_SUMMARY" \
+          -e HOME=/tmp \
+          -e GITHUB_STEP_SUMMARY \
+          saml-chaos-lab-runner test \
+            --login-url "$INPUT_LOGIN_URL" \
+            --acs-url "$INPUT_ACS_URL" \
+            --sp-entity-id "$INPUT_SP_ENTITY_ID" \
+            --success-url "$INPUT_SUCCESS_URL" \
+            --fail-on "$INPUT_FAIL_ON" \
+            --state-dir /workspace/.saml-chaos-lab

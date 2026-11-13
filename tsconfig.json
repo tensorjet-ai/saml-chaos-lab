@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "target": "ES2023",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "lib": ["ES2023", "DOM"],
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "noImplicitOverride": true,
+    "noFallthroughCasesInSwitch": true,
+    "verbatimModuleSyntax": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "paths": {
+      "@saml-chaos/contracts": ["./packages/contracts/src/index.ts"],
+      "@saml-chaos/target-safety": ["./packages/target-safety/src/index.ts"],
+      "@saml-chaos/saml-core": ["./packages/saml-core/src/index.ts"],
+      "@saml-chaos/scenarios": ["./packages/scenarios/src/index.ts"],
+      "@saml-chaos/observability": ["./packages/observability/src/index.ts"],
+      "@saml-chaos/browser-runner": ["./packages/browser-runner/src/index.ts"],
+      "saml-chaos-lab/helpers": ["./packages/cli/src/helpers.ts"],
+      "saml-chaos-lab": ["./packages/cli/src/index.ts"]
+    }
+  },
+  "include": ["apps/idp/**/*.ts", "packages/**/*.ts", "fixtures/**/*.ts", "test/**/*.ts"],
+  "exclude": ["node_modules", "dist"]
+}
