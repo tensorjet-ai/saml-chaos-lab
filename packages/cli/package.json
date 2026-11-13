@@ -1,6 +1,6 @@
 {
   "name": "saml-chaos-lab",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Open-core SAML 2.0 fault-injection baseline CLI runner (Apache-2.0)",
   "license": "Apache-2.0",
   "homepage": "https://saml.tensorjetai.com",

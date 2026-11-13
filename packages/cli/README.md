@@ -152,12 +152,12 @@ jobs:
 
       - name: Provision IdP Metadata & Start Test SP
         run: |
-          npx --yes saml-chaos-lab@0.1.0 metadata --out ./idp-metadata.xml
+          npx --yes saml-chaos-lab@0.1.1 metadata --out ./idp-metadata.xml
           # Start your SP configured with ./idp-metadata.xml in the background
 
       - name: Run Baseline SAML Security Checks
         run: |
-          npx --yes saml-chaos-lab@0.1.0 test \
+          npx --yes saml-chaos-lab@0.1.1 test \
             --login-url http://127.0.0.1:4000/sso/login \
             --acs-url http://127.0.0.1:4000/saml/acs \
             --sp-entity-id urn:example:staging-sp \
@@ -186,7 +186,7 @@ Pull the commercial edition after checkout at [saml.tensorjetai.com](https://sam
 
 ```bash
 echo "$TJ_LICENSE_KEY" | docker login registry.tensorjetai.com -u license --password-stdin
-docker pull registry.tensorjetai.com/saml-chaos-lab-commercial:0.1.0
+docker pull registry.tensorjetai.com/saml-chaos-lab-commercial:0.1.1
 ```
 
 ---

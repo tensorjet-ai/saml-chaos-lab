@@ -1,4 +1,4 @@
-# Known limitations — v0.1.0 / Catalog 2.0.0
+# Known limitations — v0.1.1 / Catalog 2.0.0
 
 - SAML Web Browser SSO only; no OIDC, SCIM, SLO, encryption, or IdP-initiated support.
 - Catalog 2.0.0 adds XML Signature Wrapping, canonicalization, XML parser, and identity-selection probes. Results depend on the target parser and SAML library; a passing probe does not certify the target.
